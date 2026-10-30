@@ -800,7 +800,26 @@ body.iresponLoggedIn .poster-section{display:none}
 
 const SUPABASE_URL="https://avzfezilzskiadekjmcj.supabase.co";
 const SUPABASE_KEY="sb_publishable_morl6aM1m4Oqcf2LkqAEGQ_OcUt2_3Y";
+const APP_URL="https://i-respon.github.io/i-respon/";
+const RECOVERY_REDIRECT_URL=APP_URL+"?auth=recovery";
+// Capture callback markers before Supabase consumes and clears the URL fragment.
+const recoveryEntryQuery=new URLSearchParams(location.search);
+const recoveryEntryHash=new URLSearchParams(location.hash.slice(1));
+const recoveryEntryError=recoveryEntryHash.get("error_description")||recoveryEntryQuery.get("error_description");
+let recoveryMode=recoveryEntryQuery.get("auth")==="recovery"||recoveryEntryHash.get("type")==="recovery"||!!recoveryEntryError;
+let recoveryReady=false;
+let recoveryCompleted=false;
+try{recoveryMode=recoveryMode||sessionStorage.getItem("irespon-recovery-active")==="1";}catch(_){}
 const db=window.supabase.createClient(SUPABASE_URL,SUPABASE_KEY);
+// Keep the callback synchronous; do not await auth calls inside an auth listener.
+db.auth.onAuthStateChange((event,session)=>{
+ if(event==="PASSWORD_RECOVERY"){
+  recoveryMode=true;recoveryReady=!!session;
+  try{sessionStorage.setItem("irespon-recovery-active","1");}catch(_){}
+  setTimeout(()=>{if(!recoveryCompleted){recoveryPage();$("resetMessage").textContent=recoveryReady?"Sila masukkan kata laluan baharu.":"Pautan pemulihan tidak sah. Sila minta pautan baharu.";}},0);
+ }
+ if(event==="SIGNED_OUT"&&recoveryMode){recoveryReady=false;setTimeout(()=>{if(!recoveryCompleted)recoveryPage();},0);}
+});
 const BUCKET="bukti-pemantauan",PAGE_SIZE=10;
 
 let currentUser=null,currentProfile=null;
@@ -1231,7 +1250,7 @@ $("registerForm").addEventListener("submit",async e=>{
   const {data,error}=await db.auth.signUp({
    email,password,
    options:{
-    emailRedirectTo:"https://ilyasshahrul644.github.io/i-respon/",
+    emailRedirectTo:APP_URL,
     data:{nama,kawasan,kelas,peranan:"guru"}
    }
   });
@@ -1258,8 +1277,7 @@ $("registerForm").addEventListener("submit",async e=>{
 
 
 /* Pemulihan kata laluan Supabase. */
-let recoveryMode=new URLSearchParams(location.search).get("auth")==="recovery"||new URLSearchParams(location.hash.slice(1)).get("type")==="recovery";
-let recoveryReady=false;
+
 function authPage(id){
  ["loginSection","registerSection","forgotPasswordSection","resetPasswordSection","dashboardSection"].forEach(key=>$(key).classList.toggle("hidden",key!==id));
  document.body.classList.remove("iresponLoggedIn");
@@ -1269,14 +1287,14 @@ function cleanRecoveryUrl(){const url=new URL(location.href);url.searchParams.de
 $("forgotPasswordButton").onclick=()=>{clearStatus();$("recoveryEmail").value=$("email").value;authPage("forgotPasswordSection");$("recoveryEmail").focus();};
 $("recoveryBackButton").onclick=()=>{clearStatus();authPage("loginSection");};
 $("resetBackButton").onclick=async()=>{
- try{const {error}=await db.auth.signOut({scope:"local"});if(error)throw error;recoveryMode=false;recoveryReady=false;currentUser=null;currentProfile=null;cleanRecoveryUrl();$("resetPasswordForm").reset();authPage("loginSection");}
+ try{const {error}=await db.auth.signOut({scope:"local"});if(error)throw error;recoveryMode=false;recoveryReady=false;recoveryCompleted=false;try{sessionStorage.removeItem("irespon-recovery-active");}catch(_){}currentUser=null;currentProfile=null;cleanRecoveryUrl();$("resetPasswordForm").reset();authPage("loginSection");}
  catch(err){$("resetMessage").textContent="Tidak berjaya keluar: "+err.message;}
 };
 document.querySelectorAll("[data-password-eye]").forEach(button=>button.onclick=()=>{const field=$(button.dataset.passwordEye);const visible=field.type==="password";field.type=visible?"text":"password";button.setAttribute("aria-pressed",String(visible));button.setAttribute("aria-label",visible?"Sembunyikan kata laluan":"Tunjukkan kata laluan");});
 $("forgotPasswordForm").onsubmit=async e=>{
  e.preventDefault();const button=$("sendRecoveryButton"),message=$("recoveryMessage");button.disabled=true;message.className="";message.textContent="Sedang menghantar pautan...";
- try{const redirect=new URL(location.href);redirect.search="";redirect.hash="";redirect.searchParams.set("auth","recovery");
- const {error}=await db.auth.resetPasswordForEmail($("recoveryEmail").value.trim(),{redirectTo:redirect.href});if(error)throw error;
+ try{
+ const {error}=await db.auth.resetPasswordForEmail($("recoveryEmail").value.trim(),{redirectTo:RECOVERY_REDIRECT_URL});if(error)throw error;
  message.className="success";message.textContent="Jika e-mel ini berdaftar, pautan tetapan semula akan dihantar. Semak peti masuk dan folder spam.";
  }catch(err){message.textContent=/rate|limit|429/i.test(err.message)?"Had penghantaran e-mel dicapai. Sila cuba semula kemudian.":"Pautan tidak dapat dihantar: "+err.message;}
  finally{button.disabled=false;}
@@ -1289,13 +1307,11 @@ $("resetPasswordForm").onsubmit=async e=>{
  if(password!==$("confirmNewPassword").value){message.textContent="Kata laluan tidak sepadan. Sila semak semula.";return;}
  button.disabled=true;button.textContent="Sedang menyimpan...";
  try{const {error}=await db.auth.updateUser({password});if(error)throw error;
- recoveryReady=false;$("resetPasswordForm").reset();message.className="success";message.textContent="Kata laluan berjaya dikemas kini. Tekan Kembali ke Log Masuk untuk masuk semula.";cleanRecoveryUrl();
+ recoveryCompleted=true;recoveryReady=false;try{sessionStorage.removeItem("irespon-recovery-active");}catch(_){}$("resetPasswordForm").reset();message.className="success";message.textContent="Kata laluan berjaya dikemas kini. Tekan Kembali ke Log Masuk untuk masuk semula.";cleanRecoveryUrl();
  }catch(err){message.textContent="Kata laluan gagal dikemas kini: "+err.message;}
  finally{button.disabled=!recoveryReady;button.textContent="Simpan Kata Laluan";}
 };
-db.auth.onAuthStateChange((event,session)=>{
- if(event==="PASSWORD_RECOVERY"){recoveryReady=!!session;recoveryPage();}
-});
+
 if(recoveryMode)recoveryPage();
 
 /* LOG MASUK DAN PROFIL */
@@ -2451,23 +2467,34 @@ async function muatSenaraiSurat(){
 /* PULIHKAN SESI */
 async function restoreSession(){
  try{
-  const {data,error}=await db.auth.getSession();
+  if(recoveryMode){recoveryPage();$("resetMessage").textContent="Sedang mengesahkan pautan pemulihan...";}
+  if(recoveryEntryError)throw new Error("Pautan pemulihan tidak sah atau telah tamat tempoh. Sila minta pautan baharu.");
+  let {data,error}=await db.auth.getSession();
   if(error)throw error;
+  // PKCE callbacks must exchange their code when automatic initialization did not.
+  if(recoveryMode&&!data.session&&recoveryEntryQuery.get("code")){
+   const exchanged=await db.auth.exchangeCodeForSession(recoveryEntryQuery.get("code"));
+   if(exchanged.error)throw exchanged.error;
+   data=exchanged.data;
+  }
   if(recoveryMode){
-   recoveryReady=!!data.session;
-   recoveryPage();
-   const params=new URLSearchParams(location.hash.slice(1));
-   $("resetMessage").textContent=data.session?"":(params.get("error_description")||"Pautan tidak sah atau telah tamat tempoh. Kembali ke Log Masuk untuk meminta pautan baharu.");
+   if(!data.session)throw new Error("Pautan tidak sah atau telah tamat tempoh. Kembali ke Log Masuk dan minta pautan baharu. Buka e-mel yang paling terkini.");
+   // Confirm the session with Auth before enabling the password update.
+   const checked=await db.auth.getUser();
+   if(checked.error||!checked.data?.user)throw checked.error||new Error("Sesi pemulihan tidak sah.");
+   recoveryReady=true;
+   try{sessionStorage.setItem("irespon-recovery-active","1");}catch(_){}
+   recoveryPage();$("resetMessage").textContent="Sila masukkan kata laluan baharu.";
+   cleanRecoveryUrl();
    return;
   }
   if(!data.session)return;
-
   currentUser=data.session.user;
   await loadProfile();
-
   if(currentProfile)await showDashboard();
  }catch(err){
-  console.error("Gagal memulihkan sesi:",err);
+  if(recoveryMode){recoveryReady=false;recoveryPage();$("resetMessage").className="";$("resetMessage").textContent="Tidak dapat mengesahkan pautan. "+err.message;}
+  else showStatus("Sesi tidak dapat dipulihkan. Sila log masuk semula.","error");
  }
 }
 
@@ -2662,7 +2689,6 @@ restoreSession();
 </script>
 </body>
 </html>
-
 
 
 
