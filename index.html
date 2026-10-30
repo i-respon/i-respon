@@ -567,6 +567,41 @@ body.iresponLoggedIn .poster-section{display:none}
 .feedback-camera-details{margin:4px 0 12px;}
 .feedback-camera-details>.muted{margin:4px 0;font-size:12px;}
 
+
+/* Highlight the public authentication screens; keep dashboards readable */
+#forgotPasswordSection,#resetPasswordSection{position:relative;isolation:isolate;overflow:hidden;max-width:760px;margin:20px auto 30px;padding:clamp(22px,5vw,40px);border:2px solid transparent;border-radius:25px;background:linear-gradient(#091b4b,#091b4b) padding-box,linear-gradient(125deg,#00eaff,#4c83ff 32%,#ff43e5 68%,#00eaff) border-box;box-shadow:0 0 15px #00eaff77,0 0 27px #ff43e54a,inset 0 0 34px #1146ab55;color:#eef7ff}
+
+#forgotPasswordSection::before,#resetPasswordSection::before{content:"";position:absolute;z-index:-1;inset:0;background:radial-gradient(circle at 95% 0%,#df37ff23,transparent 37%),radial-gradient(circle at 0% 100%,#00eaff1c,transparent 38%);pointer-events:none}
+
+#forgotPasswordSection h2,#resetPasswordSection h2{color:white;font-size:clamp(28px,4vw,37px);margin-bottom:8px;text-shadow:0 0 12px #00eaff,0 0 23px #385dff}
+
+#forgotPasswordSection .muted,#resetPasswordSection .muted{color:#cbdcfb;font-size:15px}
+
+#forgotPasswordSection label,#resetPasswordSection label{color:#f8fbff;font-size:16px;margin:20px 0 9px}
+
+#forgotPasswordSection input,#resetPasswordSection input{background:#0a2356;color:#fff;border:2px solid #00eaff;border-radius:14px;padding:15px 16px;min-height:53px;box-shadow:0 0 9px #00eaff80,inset 0 0 12px #008cff25;outline:none;transition:box-shadow .2s,border-color .2s}
+
+#forgotPasswordSection #password,#resetPasswordSection input[type=password]{border-color:#ff43e5;box-shadow:0 0 10px #ff43e58c,inset 0 0 12px #ff43e521}
+
+#forgotPasswordSection input:focus,#resetPasswordSection input:focus{border-color:#ffe15a;box-shadow:0 0 0 3px #ffe15a30,0 0 22px #00eaffaa}
+
+#forgotPasswordSection button,#resetPasswordSection button{padding:15px 20px;min-height:50px;border-radius:13px;transition:transform .2s,box-shadow .2s}
+
+#forgotPasswordSection .secondary,#resetPasswordSection .secondary{background:#142b66;border:1px solid #7e9bff;color:#e5efff}
+
+#forgotPasswordSection button:hover,#resetPasswordSection button:hover{transform:translateY(-2px);box-shadow:0 0 22px #00eaffaa,0 0 27px #ff43e577}
+#forgotPasswordSection,#resetPasswordSection{margin-top:18px;border-radius:20px}
+#forgotPasswordSection button,#resetPasswordSection button{transition:none}
+
+#forgotPasswordSection,#resetPasswordSection{border:3px solid transparent!important;background:linear-gradient(#091b4b,#091b4b) padding-box,conic-gradient(from var(--border-angle),#00eaff,#2f68ff,#ff43e5,#ffe55b,#00eaff) border-box!important;animation:neonBorderSpin 5s linear infinite;box-shadow:0 0 20px #00eaff80,0 0 30px #ff43e54a,inset 0 0 30px #1146ab55!important}
+
+#forgotPasswordSection:focus-within,#resetPasswordSection:focus-within{box-shadow:0 0 28px #00eaffae,0 0 38px #ff43e588,inset 0 0 30px #1146ab55!important}
+.orbitLogo,#forgotPasswordSection,#resetPasswordSection{animation:none!important}
+#loginSection .authTextLink,#forgotPasswordSection .authTextLink,#resetPasswordSection .authTextLink{display:block;background:transparent;border:0;color:#00eaff;text-decoration:underline;box-shadow:none;min-height:44px;padding:8px 0;margin:4px 0 8px;cursor:pointer;}
+#forgotPasswordButton{margin-left:auto!important;}
+#sendRecoveryButton,#savePasswordButton{width:100%;background:linear-gradient(110deg,#00c8ef,#2575ff,#ef2bd7);color:white;font-weight:700;margin-top:18px;}
+.passwordEyeRow{display:flex;align-items:center;gap:8px;}.passwordEyeRow input{flex:1;min-width:0;}.passwordEyeRow button{flex:0 0 44px;padding:6px!important;background:#142b66;color:white;}
+#resetMessage.success,#recoveryMessage.success{padding:12px;border:1px solid #10b981;border-radius:10px;color:#a7f3d0;background:#064e3b;}
 </style>
 </head>
 
@@ -624,10 +659,28 @@ body.iresponLoggedIn .poster-section{display:none}
 <form id="loginForm">
 <label>E-mel</label><input id="email" type="email" required autocomplete="username">
 <label>Kata laluan</label><input id="password" type="password" required autocomplete="current-password">
+<button id="forgotPasswordButton" class="authTextLink" type="button">Lupa Kata Laluan?</button>
 <button id="loginButton">Log Masuk</button>
 <button id="showRegisterButton" class="secondary" type="button">Daftar Akaun Guru</button>
 </form>
 </section>
+
+
+<section id="forgotPasswordSection" class="card hidden">
+<h2>✉ Lupa Kata Laluan?</h2>
+<p class="muted">Masukkan e-mel yang didaftarkan untuk menerima pautan tetapan semula.</p>
+<form id="forgotPasswordForm"><label for="recoveryEmail">E-mel berdaftar</label><input id="recoveryEmail" type="email" autocomplete="email" placeholder="nama@contoh.com" required>
+<button id="sendRecoveryButton" type="submit">Hantar Pautan</button>
+<p class="muted">Semak peti masuk dan folder spam.</p><p id="recoveryMessage" role="status" aria-live="polite"></p>
+<button id="recoveryBackButton" class="authTextLink" type="button">Kembali ke Log Masuk</button></form></section>
+<section id="resetPasswordSection" class="card hidden">
+<h2>⚿ Tetapkan Kata Laluan</h2><p class="muted">Cipta kata laluan baharu untuk akaun anda.</p>
+<form id="resetPasswordForm">
+<label for="newPassword">Kata laluan baharu</label><div class="passwordEyeRow"><input id="newPassword" type="password" minlength="8" autocomplete="new-password" required><button type="button" data-password-eye="newPassword" aria-label="Tunjukkan kata laluan" aria-pressed="false">👁</button></div>
+<p class="muted">Gunakan sekurang-kurangnya 8 aksara.</p>
+<label for="confirmNewPassword">Sahkan kata laluan baharu</label><div class="passwordEyeRow"><input id="confirmNewPassword" type="password" minlength="8" autocomplete="new-password" required><button type="button" data-password-eye="confirmNewPassword" aria-label="Tunjukkan kata laluan" aria-pressed="false">👁</button></div>
+<button id="savePasswordButton" type="submit" disabled>Simpan Kata Laluan</button><p id="resetMessage" role="status" aria-live="polite"></p>
+<button id="resetBackButton" class="authTextLink" type="button">Kembali ke Log Masuk</button></form></section>
 
 <section id="registerSection" class="card hidden">
 <h2>Daftar Akaun Guru</h2>
@@ -1203,6 +1256,48 @@ $("registerForm").addEventListener("submit",async e=>{
  }
 });
 
+
+/* Pemulihan kata laluan Supabase. */
+let recoveryMode=new URLSearchParams(location.search).get("auth")==="recovery"||new URLSearchParams(location.hash.slice(1)).get("type")==="recovery";
+let recoveryReady=false;
+function authPage(id){
+ ["loginSection","registerSection","forgotPasswordSection","resetPasswordSection","dashboardSection"].forEach(key=>$(key).classList.toggle("hidden",key!==id));
+ document.body.classList.remove("iresponLoggedIn");
+}
+function recoveryPage(){recoveryMode=true;authPage("resetPasswordSection");$("savePasswordButton").disabled=!recoveryReady;}
+function cleanRecoveryUrl(){const url=new URL(location.href);url.searchParams.delete("auth");url.searchParams.delete("code");url.hash="";history.replaceState(null,"",url.pathname+url.search);}
+$("forgotPasswordButton").onclick=()=>{clearStatus();$("recoveryEmail").value=$("email").value;authPage("forgotPasswordSection");$("recoveryEmail").focus();};
+$("recoveryBackButton").onclick=()=>{clearStatus();authPage("loginSection");};
+$("resetBackButton").onclick=async()=>{
+ try{const {error}=await db.auth.signOut({scope:"local"});if(error)throw error;recoveryMode=false;recoveryReady=false;currentUser=null;currentProfile=null;cleanRecoveryUrl();$("resetPasswordForm").reset();authPage("loginSection");}
+ catch(err){$("resetMessage").textContent="Tidak berjaya keluar: "+err.message;}
+};
+document.querySelectorAll("[data-password-eye]").forEach(button=>button.onclick=()=>{const field=$(button.dataset.passwordEye);const visible=field.type==="password";field.type=visible?"text":"password";button.setAttribute("aria-pressed",String(visible));button.setAttribute("aria-label",visible?"Sembunyikan kata laluan":"Tunjukkan kata laluan");});
+$("forgotPasswordForm").onsubmit=async e=>{
+ e.preventDefault();const button=$("sendRecoveryButton"),message=$("recoveryMessage");button.disabled=true;message.className="";message.textContent="Sedang menghantar pautan...";
+ try{const redirect=new URL(location.href);redirect.search="";redirect.hash="";redirect.searchParams.set("auth","recovery");
+ const {error}=await db.auth.resetPasswordForEmail($("recoveryEmail").value.trim(),{redirectTo:redirect.href});if(error)throw error;
+ message.className="success";message.textContent="Jika e-mel ini berdaftar, pautan tetapan semula akan dihantar. Semak peti masuk dan folder spam.";
+ }catch(err){message.textContent=/rate|limit|429/i.test(err.message)?"Had penghantaran e-mel dicapai. Sila cuba semula kemudian.":"Pautan tidak dapat dihantar: "+err.message;}
+ finally{button.disabled=false;}
+};
+$("resetPasswordForm").onsubmit=async e=>{
+ e.preventDefault();const button=$("savePasswordButton"),message=$("resetMessage");message.className="";
+ const password=$("newPassword").value;
+ if(!recoveryReady){message.textContent="Sila buka pautan pemulihan yang sah daripada e-mel.";return;}
+ if(password.length<8){message.textContent="Kata laluan mesti sekurang-kurangnya 8 aksara.";return;}
+ if(password!==$("confirmNewPassword").value){message.textContent="Kata laluan tidak sepadan. Sila semak semula.";return;}
+ button.disabled=true;button.textContent="Sedang menyimpan...";
+ try{const {error}=await db.auth.updateUser({password});if(error)throw error;
+ recoveryReady=false;$("resetPasswordForm").reset();message.className="success";message.textContent="Kata laluan berjaya dikemas kini. Tekan Kembali ke Log Masuk untuk masuk semula.";cleanRecoveryUrl();
+ }catch(err){message.textContent="Kata laluan gagal dikemas kini: "+err.message;}
+ finally{button.disabled=!recoveryReady;button.textContent="Simpan Kata Laluan";}
+};
+db.auth.onAuthStateChange((event,session)=>{
+ if(event==="PASSWORD_RECOVERY"){recoveryReady=!!session;recoveryPage();}
+});
+if(recoveryMode)recoveryPage();
+
 /* LOG MASUK DAN PROFIL */
 $("loginForm").addEventListener("submit",async e=>{
  e.preventDefault();
@@ -1266,6 +1361,7 @@ $("backToModules").onclick=()=>showModule("home");
 $("homeLogoutButton").onclick=()=>$("logoutButton").click();
 
 async function showDashboard(){
+ if(recoveryMode){recoveryPage();return;}
  $("loginSection").classList.add("hidden");
  $("registerSection").classList.add("hidden");
  $("dashboardSection").classList.remove("hidden");
@@ -2357,6 +2453,13 @@ async function restoreSession(){
  try{
   const {data,error}=await db.auth.getSession();
   if(error)throw error;
+  if(recoveryMode){
+   recoveryReady=!!data.session;
+   recoveryPage();
+   const params=new URLSearchParams(location.hash.slice(1));
+   $("resetMessage").textContent=data.session?"":(params.get("error_description")||"Pautan tidak sah atau telah tamat tempoh. Kembali ke Log Masuk untuk meminta pautan baharu.");
+   return;
+  }
   if(!data.session)return;
 
   currentUser=data.session.user;
