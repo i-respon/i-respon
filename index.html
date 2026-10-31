@@ -288,7 +288,6 @@ body.iresponLoggedIn .poster-section{display:none}
 @media(prefers-reduced-motion:reduce){.moduleCard{transition:none}}
 /* ===== TAMAT MENU MODUL ===== */
 
-
 /* KATEGORI PENEMUAN PEMANTAUAN - MULTI PILIHAN */
 .findingChoices{display:grid;gap:9px;margin:10px 0 17px}
 .findingChoice{display:flex;align-items:center;gap:12px;margin:0;padding:13px;border:1px solid #b7c9ee;border-radius:13px;background:#f2f7ff;color:#15386e;cursor:pointer;font-weight:700;transition:border-color .2s,background .2s}
@@ -602,6 +601,34 @@ body.iresponLoggedIn .poster-section{display:none}
 #sendRecoveryButton,#savePasswordButton{width:100%;background:linear-gradient(110deg,#00c8ef,#2575ff,#ef2bd7);color:white;font-weight:700;margin-top:18px;}
 .passwordEyeRow{display:flex;align-items:center;gap:8px;}.passwordEyeRow input{flex:1;min-width:0;}.passwordEyeRow button{flex:0 0 44px;padding:6px!important;background:#142b66;color:white;}
 #resetMessage.success,#recoveryMessage.success{padding:12px;border:1px solid #10b981;border-radius:10px;color:#a7f3d0;background:#064e3b;}
+
+/* ===== PROFIL SAYA: GURU & PENYELIA ===== */
+.profileLaunch{position:absolute;right:0;top:0;display:flex;align-items:center;gap:9px;padding:8px 13px!important;margin:0!important;background:linear-gradient(125deg,#0a3a88,#6428a8)!important;border:2px solid #00eaff!important;border-radius:40px!important;color:white;box-shadow:0 0 15px #00eaff88!important;z-index:3}
+.profileLaunch img,.profileLaunch .avatarFallback{width:38px;height:38px;border-radius:50%;object-fit:cover;display:grid;place-items:center;background:#1b4a91;font-size:22px}
+#moduleLanding{position:relative;padding-top:65px}
+#profileOverlay{position:fixed;inset:0;background:#020a22d9;z-index:99990;display:flex;align-items:center;justify-content:center;padding:15px;overflow-y:auto}
+#profileOverlay.hidden{display:none!important}
+.profilePanel{width:min(900px,100%);max-height:94vh;overflow-y:auto;border:2px solid #00eaff;border-radius:22px;background:linear-gradient(145deg,#0c245d,#121341);color:#f1f8ff;box-shadow:0 0 30px #00eaff77,0 0 38px #bd44ff66;padding:24px}
+.profilePanel h2{color:#fff!important;margin:0}.profileTop{display:flex;align-items:center;justify-content:space-between;gap:12px;margin-bottom:18px}
+.profileTabs{display:flex;gap:8px;flex-wrap:wrap;margin:12px 0 20px}.profileTabs button{background:#132e71;border:1px solid #559dff;margin:0}.profileTabs button.selected{background:#086ad5;border-color:#5df3ff}
+.profileFields{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px 18px}.profileFields label{font-weight:700;color:#eaf6ff;margin:0}.profileFields input{margin-top:7px;background:#071a42;color:white;border:1px solid #59aaff}.profileFields input[readonly]{opacity:.72}
+.profileAvatar{width:92px;height:92px;border-radius:50%;object-fit:cover;border:3px solid #54edff;background:#16346c}.profileActions{display:flex;justify-content:flex-end;gap:10px;flex-wrap:wrap;margin-top:20px}.profileActions button{margin:0}
+#profileNotice{min-height:22px;margin-top:10px}#profileOverlay .muted{color:#c2d8ff}
+@media(max-width:640px){#moduleLanding{padding-top:78px}.profileLaunch{right:5px;top:3px}.profileFields{grid-template-columns:1fr}.profilePanel{padding:15px}}
+/* ===== TAMAT PROFIL ===== */
+
+/* EDITOR CROP AVATAR: GURU DAN PENYELIA */
+#avatarCropOverlay{position:fixed;inset:0;z-index:1000001;background:#020919d9;display:grid;place-items:center;padding:15px;overflow-y:auto}
+#avatarCropOverlay.hidden{display:none!important}
+.avatarCropPanel{width:min(95vw,470px);max-height:96vh;overflow:auto;padding:20px;border-radius:22px;border:2px solid #00eaff;background:linear-gradient(145deg,#0a245b,#161044);box-shadow:0 0 28px #00eaff77;color:#fff;text-align:center}
+.avatarCropPanel h2{color:white;margin:3px 0 8px}.avatarCropPanel p{color:#c9dfff;font-size:13px}
+#avatarCropCanvas{display:block;width:min(100%,320px);height:auto;aspect-ratio:1;margin:14px auto;border-radius:50%;border:3px solid #7cf5ff;box-shadow:0 0 16px #00eaff99;cursor:grab;touch-action:none;background:#112650}
+#avatarCropCanvas:active{cursor:grabbing}.avatarCropPanel input[type=range]{accent-color:#00eaff;width:100%}
+.avatarCropButtons{display:flex;justify-content:center;flex-wrap:wrap;gap:9px}.avatarCropButtons button{margin:3px 0;border:1px solid #69eaff;background:#1c4c96}.avatarCropButtons #avatarCropApply{background:linear-gradient(100deg,#009dc9,#6a35df)}
+
+
+/* LAPORAN BULANAN NEON — PENYELIA */
+#monthlyReportPage{color:#eaf7ff}.reportHero{background:linear-gradient(110deg,#113e96,#32116f);padding:17px;border:1px solid #ad68ff;border-radius:16px;box-shadow:0 0 18px #994bff55}.reportFilters{display:grid;grid-template-columns:1fr 1fr;gap:12px}.reportFilters select{background:#102b62;color:white;border:1px solid #62eaff}.reportStats{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px;margin:16px 0}.reportStat{padding:15px;border:1px solid var(--rc);background:#102451;border-radius:15px;box-shadow:0 0 12px color-mix(in srgb,var(--rc) 35%,transparent)}.reportStat b{display:block;font-size:33px;color:var(--rc)}.reportStat small{color:#d3eaff}.reportPanel{background:#0b214f;border:1px solid #387ee2;border-radius:16px;padding:16px;margin:14px 0}.reportProgress{height:14px;border-radius:20px;background:#263e69;overflow:hidden}.reportProgress>div{height:100%;background:linear-gradient(90deg,#04d9ff,#16f6a0);transition:width .2s}.reportActions{display:flex;flex-wrap:wrap;gap:10px}.reportActions button{background:linear-gradient(100deg,#007be2,#8232df);border:1px solid #7ff4ff}.reportTable{width:100%;border-collapse:collapse;font-size:13px}.reportTable th,.reportTable td{padding:9px;border-bottom:1px solid #365b93;text-align:left;overflow-wrap:anywhere}.reportTable th{color:#7eeeff}.reportScroll{overflow-x:auto}#reportMessage{white-space:pre-wrap;color:#c9ecff}#reportArchiveList button{font-size:12px;margin:3px}#monthlyReportPage .muted{color:#c2d9ff}@media(max-width:520px){.reportFilters{grid-template-columns:1fr}.reportStat b{font-size:27px}}
 </style>
 </head>
 
@@ -697,8 +724,58 @@ body.iresponLoggedIn .poster-section{display:none}
 </form>
 </section>
 
+
+
+<div id="avatarCropOverlay" class="hidden" role="dialog" aria-modal="true" aria-labelledby="avatarCropTitle">
+ <div class="avatarCropPanel">
+  <h2 id="avatarCropTitle">✂️ Edit & Crop Gambar Profil</h2>
+  <p>Tarik gambar untuk susun muka di tengah bulatan. Zum atau putar jika perlu.</p>
+  <canvas id="avatarCropCanvas" width="320" height="320" aria-label="Pratonton crop gambar profil"></canvas>
+  <label for="avatarCropZoom">🔎 Zum gambar</label>
+  <input id="avatarCropZoom" type="range" min="1" max="3" step="0.01" value="1">
+  <div class="avatarCropButtons">
+   <button type="button" id="avatarCropLeft">↶ Putar Kiri</button>
+   <button type="button" id="avatarCropRight">↷ Putar Kanan</button>
+   <button type="button" id="avatarCropReset">↺ Reset</button>
+  </div>
+  <div class="avatarCropButtons" style="margin-top:12px">
+   <button type="button" id="avatarCropCancel" class="secondary">Batal</button>
+   <button type="button" id="avatarCropApply">✓ Guna Gambar Ini</button>
+  </div>
+ </div>
+</div>
+
+<div id="profileOverlay" class="hidden" role="dialog" aria-modal="true" aria-labelledby="profileHeading">
+ <div class="profilePanel">
+  <div class="profileTop"><h2 id="profileHeading">⚙️ Profil Saya</h2><button id="closeProfile" type="button" class="secondary">✕ Tutup</button></div>
+  <div class="profileTabs"><button type="button" data-profile-tab="personal" class="selected">👤 Maklumat Peribadi</button><button type="button" data-profile-tab="school">🏫 Maklumat Sekolah</button><button type="button" data-profile-tab="report" id="reportTabButton" class="hidden">📊 Laporan Bulanan</button><button type="button" data-profile-tab="password">🔒 Tukar Kata Laluan</button></div>
+  <form id="profileEditForm">
+   <div data-profile-page="personal">
+    <div style="display:flex;align-items:center;gap:18px;flex-wrap:wrap;margin-bottom:16px"><img id="profileAvatarPreview" class="profileAvatar" alt="Gambar profil" src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='92' height='92'%3E%3Crect width='92' height='92' fill='%231a3677'/%3E%3Ctext x='46' y='61' font-size='50' text-anchor='middle'%3E%F0%9F%91%A4%3C/text%3E%3C/svg%3E"><div><label for="profilePhoto">Gambar profil (JPG/PNG, maksimum 2 MB)</label><input type="file" id="profilePhoto" accept="image/png,image/jpeg,image/webp"><p class="muted">Gambar boleh digerakkan, dizum dan diputar sebelum disimpan.</p></div></div>
+    <div class="profileFields"><label>Nama penuh<input id="profileName" maxlength="100" required></label><label>E-mel log masuk<input id="profileEmail" readonly></label><label>Nombor telefon<input id="profilePhone" maxlength="25" type="tel"></label><label>Jawatan / Akses<input id="profileRole" readonly></label></div>
+   </div>
+   <div data-profile-page="school" class="hidden"><div class="profileFields"><label>Nama Tabika / Taska KEMAS<input id="profileSchool" maxlength="100"></label><label>Kod Sekolah (jika ada)<input id="profileSchoolCode" maxlength="40"></label><label>Kawasan<input id="profileArea" maxlength="100"></label><label>Daerah<input id="profileDistrict" maxlength="100"></label><label>Negeri<input id="profileState" maxlength="100"></label></div><p class="muted">Maklumat sekolah dan kawasan dikemas kini untuk profil sendiri sahaja.</p></div>
+   <div data-profile-page="report" id="monthlyReportPage" class="hidden">
+    <div class="reportHero"><h3 style="color:white;margin:0 0 8px">⚡ i-RESPON ANALYTICS</h3><p style="margin:0;color:#cbe7ff">Laporan Pemantauan Bulanan • Arkib Penyelia</p></div>
+    <div class="reportFilters" style="margin-top:15px"><label>Bulan<select id="reportMonth"></select></label><label>Tahun<select id="reportYear"></select></label></div>
+    <div class="reportStats"><div class="reportStat" style="--rc:#00eaff">📋<b id="reportTotal">0</b><small>Jumlah Pemantauan</small></div><div class="reportStat" style="--rc:#1cf3a0">✅<b id="reportDone">0</b><small>Selesai</small></div><div class="reportStat" style="--rc:#ffd343">⏳<b id="reportReview">0</b><small>Menunggu Pengesahan</small></div><div class="reportStat" style="--rc:#ff5a9c">🚨<b id="reportWaiting">0</b><small>Belum Dijawab</small></div></div>
+    <div class="reportPanel"><strong>Kadar Penyelesaian: <span id="reportPercent">0%</span></strong><div class="reportProgress" style="margin-top:12px"><div id="reportProgressBar" style="width:0%"></div></div></div>
+    <div class="reportPanel"><h3 style="color:white">🏫 Ringkasan Mengikut Kelas</h3><div class="reportScroll" id="reportClasses"></div></div>
+    <div class="reportPanel"><h3 style="color:white">📝 Senarai Pemantauan</h3><div class="reportScroll" id="reportDetails"></div></div>
+    <div class="reportActions"><button type="button" id="reportRefresh">🔄 Papar Bulan</button><button type="button" id="reportSave">💾 Jana & Simpan Arkib</button><button type="button" id="reportPrint">🖨️ Cetak / PDF</button></div>
+    <p id="reportMessage" role="status"></p><div class="reportPanel"><h3 style="color:white">🗃️ Arkib Laporan Tersimpan</h3><div id="reportArchiveList">Memuatkan...</div></div>
+    <p class="muted">Arkib ialah salinan rekod pada masa laporan dijana. Rekod asal dan fail gambar tidak dipadam secara automatik untuk mengelakkan kehilangan bukti.</p>
+   </div>
+   <div data-profile-page="password" class="hidden"><p class="muted">Tukar kata laluan akaun yang sedang log masuk.</p><div class="profileFields"><label>Kata laluan baharu<input id="profileNewPassword" type="password" autocomplete="new-password" minlength="8"></label><label>Sahkan kata laluan<input id="profileConfirmPassword" type="password" autocomplete="new-password" minlength="8"></label></div><button id="profileChangePassword" type="button">Simpan Kata Laluan Baharu</button></div>
+   <p id="profileNotice" role="status" aria-live="polite"></p>
+   <div class="profileActions"><button type="button" class="secondary" id="profileCancel">Batal</button><button id="profileSave" type="submit">💾 Simpan Perubahan Profil</button></div>
+  </form>
+ </div>
+</div>
+
 <section id="dashboardSection" class="hidden">
 <section id="moduleLanding" aria-label="Menu utama i-RESPON">
+<button id="openProfile" class="profileLaunch" type="button" aria-label="Buka tetapan profil"><span id="profileLaunchAvatar" class="avatarFallback">👤</span><span>⚙️ Profil Saya</span></button>
   <h2 class="moduleWelcome" id="moduleWelcome">Selamat Datang!</h2>
   <p class="moduleRole" id="moduleRole"></p>
   <div class="moduleCards">
@@ -955,11 +1032,48 @@ function pageRecords(rows,page){
 function paginationHTML(prefix,p,total,totalRows){
  return `<p class="muted">Halaman ${p} daripada ${total} · ${totalRows} rekod</p><button class="secondary" data-page="${prefix}-prev" ${p<=1?"disabled":""}>Sebelumnya</button> <button data-page="${prefix}-next" ${p>=total?"disabled":""}>Seterusnya</button>`;
 }
-async function uploadImage(file,path,bucket=BUCKET){
- const {data,error}=await db.storage.from(bucket).upload(path,file,{upsert:false,contentType:file.type||"image/jpeg"});
- if(error)throw error;
- return data.path;
+// FIX 431: refresh token sekali, dan diagnosis saiz JWT tanpa memaparkan token.
+function ringkasanSaizJWT(token){
+ try{
+  const bahagian=token.split('.');
+  if(bahagian.length!==3)return 'Format token bukan JWT tiga bahagian; panjang '+token.length;
+  const json=atob(bahagian[1].replace(/-/g,'+').replace(/_/g,'/')+'='.repeat((4-bahagian[1].length%4)%4));
+  const claims=JSON.parse(json);
+  const saiz=Object.entries(claims).map(([k,v])=>({nama:k,saiz:JSON.stringify(v).length})).sort((a,b)=>b.saiz-a.saiz);
+  return 'Saiz JWT: '+token.length+' aksara. Bahagian: '+bahagian.map(x=>x.length).join('/')+'. Claims terbesar: '+saiz.slice(0,5).map(x=>x.nama+'='+x.saiz).join(', ')+'.';
+ }catch(_){return 'Panjang token: '+token.length+' aksara; payload JWT tidak dapat dianalisis.';}
 }
+async function uploadImage(file,path,bucket=BUCKET){
+ const encodedPath=path.split('/').map(encodeURIComponent).join('/');
+ const endpoint=SUPABASE_URL+'/storage/v1/object/'+encodeURIComponent(bucket)+'/'+encodedPath;
+ let {data:{session},error:sessionError}=await db.auth.getSession();
+ if(sessionError)throw sessionError;
+ if(!session?.access_token)throw new Error('Sesi tamat. Sila log masuk semula.');
+ let response;
+ for(let cubaan=0;cubaan<2;cubaan++){
+  if(cubaan===1){
+   const refreshed=await db.auth.refreshSession();
+   if(refreshed.error||!refreshed.data.session?.access_token)break;
+   session=refreshed.data.session;
+  }
+  try{
+   response=await fetch(endpoint,{
+    method:'POST',
+    headers:{'Authorization':'Bearer '+session.access_token,'apikey':SUPABASE_KEY,'Content-Type':file.type||'application/octet-stream'},
+    body:file,cache:'no-store',credentials:'omit'
+   });
+  }catch(err){throw new Error('Sambungan Storage gagal: '+err.message);}
+  if(response.ok)return path;
+  if(response.status!==431)break;
+ }
+ if(response?.status===431){
+  throw new Error('Muat naik ditolak (431) walaupun sesi telah diperbaharui. '+ringkasanSaizJWT(session.access_token)+' Sila hantar TEKS ralat ini sahaja; jangan hantar token.');
+ }
+ let details='';
+ try{const payload=await response.json();details=payload.message||payload.error||JSON.stringify(payload);}catch(_){details=await response?.text().catch(()=>'')||'';}
+ throw new Error('Muat naik gagal (HTTP '+(response?.status||'tiada respons')+'): '+details.slice(0,300));
+}
+
 async function signedImageURL(path,bucket=BUCKET){
  if(!path)return null;
  // Bucket bukti-pemantauan masih PUBLIC: gunakan URL awam untuk paparan stabil.
@@ -1287,8 +1401,24 @@ function cleanRecoveryUrl(){const url=new URL(location.href);url.searchParams.de
 $("forgotPasswordButton").onclick=()=>{clearStatus();$("recoveryEmail").value=$("email").value;authPage("forgotPasswordSection");$("recoveryEmail").focus();};
 $("recoveryBackButton").onclick=()=>{clearStatus();authPage("loginSection");};
 $("resetBackButton").onclick=async()=>{
- try{const {error}=await db.auth.signOut({scope:"local"});if(error)throw error;recoveryMode=false;recoveryReady=false;recoveryCompleted=false;try{sessionStorage.removeItem("irespon-recovery-active");}catch(_){}currentUser=null;currentProfile=null;cleanRecoveryUrl();$("resetPasswordForm").reset();authPage("loginSection");}
- catch(err){$("resetMessage").textContent="Tidak berjaya keluar: "+err.message;}
+ // Matikan mod pemulihan SEBELUM signOut supaya SIGNED_OUT tidak membuka semula halaman reset.
+ recoveryCompleted=true;
+ recoveryMode=false;
+ recoveryReady=false;
+ try{sessionStorage.removeItem("irespon-recovery-active");}catch(_){}
+ currentUser=null;
+ currentProfile=null;
+ cleanRecoveryUrl();
+ $("resetPasswordForm").reset();
+ authPage("loginSection");
+ try{
+  const {error}=await db.auth.signOut({scope:"local"});
+  if(error)throw error;
+ }catch(err){
+  // Kekalkan skrin log masuk dan papar ralat jika sesi gagal ditamatkan.
+  const status=$("loginStatus");
+  if(status){status.textContent="Sesi belum dapat ditamatkan: "+err.message;status.className="status error";}
+ }
 };
 document.querySelectorAll("[data-password-eye]").forEach(button=>button.onclick=()=>{const field=$(button.dataset.passwordEye);const visible=field.type==="password";field.type=visible?"text":"password";button.setAttribute("aria-pressed",String(visible));button.setAttribute("aria-label",visible?"Sembunyikan kata laluan":"Tunjukkan kata laluan");});
 $("forgotPasswordForm").onsubmit=async e=>{
@@ -1359,6 +1489,170 @@ async function loadProfile(){
  currentProfile=data;
 }
 
+
+/* ===== TETAPAN PROFIL GURU & PENYELIA ===== */
+const profileFields={phone:"profilePhone",school_code:"profileSchoolCode",district:"profileDistrict",state:"profileState"};
+let profilePhotoData="";
+// Gambar profil disimpan sebagai fail, bukan Base64 dalam JWT Auth.
+async function saveProfilePhotoToStorage(photo){
+ if(!photo||!photo.startsWith("data:image/"))return photo||"";
+ const response=await fetch(photo);
+ const blob=await response.blob();
+ if(blob.size>2*1024*1024)throw new Error("Gambar profil terlalu besar.");
+ const path=currentUser.id+"/profil/avatar-"+crypto.randomUUID()+".jpg";
+ const {error}=await db.storage.from(BUCKET).upload(path,blob,{upsert:false,contentType:"image/jpeg"});
+ if(error)throw new Error("Gagal muat naik gambar profil: "+error.message);
+ return db.storage.from(BUCKET).getPublicUrl(path).data.publicUrl;
+}
+function profileTab(tab){
+ document.querySelectorAll("[data-profile-page]").forEach(el=>el.classList.toggle("hidden",el.dataset.profilePage!==tab));
+ document.querySelectorAll("[data-profile-tab]").forEach(el=>el.classList.toggle("selected",el.dataset.profileTab===tab));
+ $("profileSave").classList.toggle("hidden",tab==="password"||tab==="report");
+ $("profileNotice").textContent="";
+}
+function profileAvatarDisplay(){
+ const photo=currentUser?.user_metadata?.irespon_photo||"";
+ const avatar=$("profileLaunchAvatar");
+ avatar.replaceChildren();
+ if(photo){const img=document.createElement("img");img.src=photo;img.alt="Gambar profil";avatar.append(img);}
+ else avatar.textContent="👤";
+}
+function openProfileSettings(){
+ if(!currentUser||!currentProfile)return;
+ const meta=currentUser.user_metadata||{};
+ $("profileName").value=currentProfile.nama||"";
+ $("profileEmail").value=currentUser.email||"";
+ $("profilePhone").value=meta.irespon_phone||"";
+ $("profileRole").value=currentProfile.peranan==="penyelia"?"Penyelia":"Guru";
+ $("profileSchool").value=currentProfile.kelas||"";
+ $("profileSchoolCode").value=meta.irespon_school_code||"";
+ $("profileArea").value=currentProfile.kawasan||"";
+ $("profileDistrict").value=meta.irespon_district||"";
+ $("profileState").value=meta.irespon_state||"";
+ profilePhotoData=meta.irespon_photo||"";
+ $("profileAvatarPreview").src=profilePhotoData||"data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='92' height='92'%3E%3Crect width='92' height='92' fill='%231a3677'/%3E%3Ctext x='46' y='61' font-size='50' text-anchor='middle'%3E%F0%9F%91%A4%3C/text%3E%3C/svg%3E";
+ $("profilePhoto").value="";$("profileNewPassword").value="";$("profileConfirmPassword").value="";
+ const supervisor=currentProfile.peranan==="penyelia";
+ $("reportTabButton").classList.toggle("hidden",!supervisor);
+ document.querySelector('[data-profile-tab="school"]').classList.toggle("hidden",supervisor);
+ profileTab("personal");$("profileOverlay").classList.remove("hidden");
+}
+function closeProfileSettings(){$("profileOverlay").classList.add("hidden");}
+$("openProfile").onclick=openProfileSettings;
+$("closeProfile").onclick=closeProfileSettings;
+$("profileCancel").onclick=closeProfileSettings;
+document.querySelectorAll("[data-profile-tab]").forEach(b=>b.onclick=()=>{profileTab(b.dataset.profileTab);if(b.dataset.profileTab==="report")loadMonthlyReport();});
+/* EDITOR CROP: hasil akhir JPEG segi empat, avatar dipaparkan bulat menggunakan CSS */
+let cropSource=null,cropAngle=0,cropZoom=1,cropOffsetX=0,cropOffsetY=0,cropPointer=null;
+const cropCanvas=$("avatarCropCanvas"),cropContext=cropCanvas.getContext("2d");
+function cropMinScale(){
+ if(!cropSource)return 1;
+ const quarter=((cropAngle%180)+180)%180===90;
+ const w=quarter?cropSource.height:cropSource.width,h=quarter?cropSource.width:cropSource.height;
+ return Math.max(320/w,320/h);
+}
+function paintAvatarCrop(){
+ if(!cropSource)return;
+ const c=cropContext,scale=cropMinScale()*cropZoom;
+ c.clearRect(0,0,320,320);c.fillStyle="#122651";c.fillRect(0,0,320,320);
+ c.save();c.translate(160+cropOffsetX,160+cropOffsetY);c.rotate(cropAngle*Math.PI/180);c.scale(scale,scale);
+ c.drawImage(cropSource,-cropSource.width/2,-cropSource.height/2);c.restore();
+ c.save();c.strokeStyle="#ffffffb8";c.lineWidth=2;c.beginPath();c.arc(160,160,157,0,Math.PI*2);c.stroke();c.restore();
+}
+function resetAvatarCrop(){cropAngle=0;cropZoom=1;cropOffsetX=0;cropOffsetY=0;$("avatarCropZoom").value="1";paintAvatarCrop();}
+function closeAvatarCrop(){ $("avatarCropOverlay").classList.add("hidden");cropPointer=null; }
+$("avatarCropCancel").onclick=closeAvatarCrop;
+$("avatarCropReset").onclick=resetAvatarCrop;
+$("avatarCropLeft").onclick=()=>{cropAngle-=90;cropOffsetX=0;cropOffsetY=0;paintAvatarCrop();};
+$("avatarCropRight").onclick=()=>{cropAngle+=90;cropOffsetX=0;cropOffsetY=0;paintAvatarCrop();};
+$("avatarCropZoom").oninput=e=>{cropZoom=Number(e.target.value);paintAvatarCrop();};
+cropCanvas.addEventListener("pointerdown",e=>{cropPointer={id:e.pointerId,x:e.clientX,y:e.clientY};cropCanvas.setPointerCapture(e.pointerId);});
+cropCanvas.addEventListener("pointermove",e=>{
+ if(!cropPointer||cropPointer.id!==e.pointerId)return;
+ const r=cropCanvas.getBoundingClientRect(),factor=320/r.width;
+ cropOffsetX+=(e.clientX-cropPointer.x)*factor;cropOffsetY+=(e.clientY-cropPointer.y)*factor;
+ cropPointer.x=e.clientX;cropPointer.y=e.clientY;paintAvatarCrop();
+});
+cropCanvas.addEventListener("pointerup",()=>cropPointer=null);
+cropCanvas.addEventListener("pointercancel",()=>cropPointer=null);
+$("avatarCropApply").onclick=()=>{
+ if(!cropSource)return;
+ // Export without preview guide ring; square image is clipped into a circle by existing avatar CSS.
+ paintAvatarCrop();
+ const out=document.createElement("canvas");out.width=240;out.height=240;
+ const ctx=out.getContext("2d");const scale=cropMinScale()*cropZoom*.75;
+ ctx.fillStyle="#122651";ctx.fillRect(0,0,240,240);
+ ctx.translate(120+cropOffsetX*.75,120+cropOffsetY*.75);ctx.rotate(cropAngle*Math.PI/180);ctx.scale(scale,scale);
+ ctx.drawImage(cropSource,-cropSource.width/2,-cropSource.height/2);
+ profilePhotoData=out.toDataURL("image/jpeg",.78);
+ $("profileAvatarPreview").src=profilePhotoData;
+ $("profileNotice").textContent="✅ Crop siap. Tekan Simpan Perubahan Profil untuk menyimpan gambar.";
+ closeAvatarCrop();cropSource=null;
+};
+$("profilePhoto").onchange=async e=>{
+ const file=e.target.files?.[0];if(!file)return;
+ if(!["image/jpeg","image/png","image/webp"].includes(file.type)||file.size>2*1024*1024){$("profileNotice").textContent="Sila pilih JPG/PNG/WEBP bersaiz maksimum 2 MB.";e.target.value="";return;}
+ try{
+  const img=await createImageBitmap(file);
+  // Resize very large source images for responsive cropping.
+  const factor=Math.min(1,1400/Math.max(img.width,img.height));
+  const source=document.createElement("canvas");source.width=Math.round(img.width*factor);source.height=Math.round(img.height*factor);
+  source.getContext("2d").drawImage(img,0,0,source.width,source.height);img.close();
+  cropSource=source;resetAvatarCrop();$("avatarCropOverlay").classList.remove("hidden");
+ }catch(err){$("profileNotice").textContent="Gambar tidak dapat diproses: "+err.message;}
+ e.target.value="";
+};
+$("profileEditForm").onsubmit=async e=>{
+ e.preventDefault();if(!currentUser||!currentProfile)return;
+ const name=$("profileName").value.trim(),school=$("profileSchool").value.trim(),area=$("profileArea").value.trim();
+ if(!name){profileTab("personal");$("profileNotice").textContent="Nama penuh wajib diisi.";return;}
+ const b=$("profileSave");b.disabled=true;$("profileNotice").textContent="Sedang menyimpan...";
+ try{
+  // profiles is the existing canonical record used by dashboard and monitoring.
+  const {data,error}=await db.from("profiles").update({nama:name,kelas:school,kawasan:area}).eq("id",currentUser.id).select("id,nama,peranan,kawasan,kelas").single();
+  if(error)throw error;
+  const photoURL=await saveProfilePhotoToStorage(profilePhotoData);
+  const metadata={irespon_phone:$("profilePhone").value.trim(),irespon_school_code:$("profileSchoolCode").value.trim(),irespon_district:$("profileDistrict").value.trim(),irespon_state:$("profileState").value.trim(),irespon_photo:photoURL};
+  const changed=await db.auth.updateUser({data:metadata});if(changed.error)throw changed.error;
+  currentUser=changed.data.user||currentUser;currentProfile=data;profilePhotoData=photoURL;
+  $("moduleWelcome").textContent="Selamat Datang, "+currentProfile.nama;
+  $("userInfo").textContent=currentProfile.nama+" · "+currentProfile.peranan+(currentProfile.kelas?" · Kelas "+currentProfile.kelas:"");
+  profileAvatarDisplay();$("profileNotice").textContent="✅ Profil berjaya disimpan.";
+ }catch(err){$("profileNotice").textContent="❌ Gagal menyimpan: "+err.message+". Semak polisi UPDATE jadual profiles di Supabase.";}
+ finally{b.disabled=false;}
+};
+$("profileChangePassword").onclick=async()=>{
+ const pass=$("profileNewPassword").value;
+ if(pass.length<8){$("profileNotice").textContent="Kata laluan mesti sekurang-kurangnya 8 aksara.";return;}
+ if(pass!==$("profileConfirmPassword").value){$("profileNotice").textContent="Kata laluan tidak sepadan.";return;}
+ const b=$("profileChangePassword");b.disabled=true;
+ try{const {error}=await db.auth.updateUser({password:pass});if(error)throw error;$("profileNewPassword").value="";$("profileConfirmPassword").value="";$("profileNotice").textContent="✅ Kata laluan berjaya dikemas kini.";}
+ catch(err){$("profileNotice").textContent="❌ "+err.message;}finally{b.disabled=false;}
+};
+/* ===== TAMAT TETAPAN PROFIL ===== */
+
+/* ===== LAPORAN BULANAN / ARKIB PENYELIA ===== */
+const reportMonths=["Januari","Februari","Mac","April","Mei","Jun","Julai","Ogos","September","Oktober","November","Disember"];
+let reportRows=[],reportArchive=null;
+(function(){const now=new Date();$("reportMonth").innerHTML=reportMonths.map((m,i)=>`<option value="${i+1}">${m}</option>`).join("");$("reportMonth").value=String(now.getMonth()+1);$("reportYear").innerHTML=Array.from({length:7},(_,i)=>now.getFullYear()-4+i).map(y=>`<option value="${y}">${y}</option>`).join("");$("reportYear").value=String(now.getFullYear());})();
+function reportRange(){const y=Number($("reportYear").value),m=Number($("reportMonth").value);return {y,m,from:`${y}-${String(m).padStart(2,"0")}-01`,to:new Date(Date.UTC(y,m,1)).toISOString().slice(0,10),label:`${reportMonths[m-1]} ${y}`};}
+function reportSummarize(rows){const done=rows.filter(r=>recordStatus(r)==="done").length,review=rows.filter(r=>recordStatus(r)==="review").length;return {total:rows.length,done,review,waiting:rows.length-done-review,percent:rows.length?Math.round(done/rows.length*100):0};}
+function reportRender(rows){const st=reportSummarize(rows);$("reportTotal").textContent=st.total;$("reportDone").textContent=st.done;$("reportReview").textContent=st.review;$("reportWaiting").textContent=st.waiting;$("reportPercent").textContent=st.percent+"%";$("reportProgressBar").style.width=st.percent+"%";
+ const groups=new Map();rows.forEach(r=>{const k=r.kelas||"Tidak dinyatakan";if(!groups.has(k))groups.set(k,[]);groups.get(k).push(r);});
+ $("reportClasses").innerHTML=groups.size?'<table class="reportTable"><thead><tr><th>Kelas</th><th>Jumlah</th><th>Selesai</th><th>Belum Selesai</th></tr></thead><tbody>'+[...groups].sort((a,b)=>a[0].localeCompare(b[0])).map(([k,rr])=>`<tr><td>${escapeHTML(k)}</td><td>${rr.length}</td><td>${rr.filter(r=>recordStatus(r)==="done").length}</td><td>${rr.filter(r=>recordStatus(r)!=="done").length}</td></tr>`).join("")+"</tbody></table>":'<p>Tiada rekod bulan ini.</p>';
+ $("reportDetails").innerHTML=rows.length?'<table class="reportTable"><thead><tr><th>Tarikh</th><th>Kelas</th><th>Penemuan</th><th>Status</th></tr></thead><tbody>'+rows.map(r=>`<tr><td>${escapeHTML(new Date(r.created_at).toLocaleDateString("ms-MY",{timeZone:"Asia/Kuala_Lumpur"}))}</td><td>${escapeHTML(r.kelas)}</td><td>${escapeHTML(r.tajuk||r.komen||r.mesej||"—")}</td><td>${escapeHTML(statusNames[recordStatus(r)])}</td></tr>`).join("")+"</tbody></table>":'<p>Tiada pemantauan direkodkan.</p>';
+}
+async function loadMonthlyReport(){if(currentProfile?.peranan!=="penyelia")return;const range=reportRange();$("reportMessage").textContent="Memuatkan rekod...";reportArchive=null;try{
+ const {data,error}=await db.from("maklum_balas_penyelia").select("*").eq("penyelia_id",currentUser.id).gte("created_at",range.from+"T00:00:00+08:00").lt("created_at",range.to+"T00:00:00+08:00").order("created_at",{ascending:true});if(error)throw error;reportRows=data||[];reportRender(reportRows);$("reportMessage").textContent=`${range.label}: ${reportRows.length} rekod aktif ditemui. Pilih arkib untuk melihat salinan terdahulu.`;await loadReportArchives();
+ }catch(e){$("reportMessage").textContent="❌ "+e.message;}}
+async function loadReportArchives(){const {data,error}=await db.from("laporan_bulanan").select("id,bulan,tahun,created_at,ringkasan").eq("penyelia_id",currentUser.id).order("tahun",{ascending:false}).order("bulan",{ascending:false}).limit(48);if(error){$("reportArchiveList").textContent="Arkib belum tersedia: "+error.message+". Jalankan SQL pemasangan terlebih dahulu.";return;}$("reportArchiveList").innerHTML=data?.length?data.map(r=>`<div style="padding:9px 0;border-bottom:1px solid #2d5798"><strong>${reportMonths[r.bulan-1]} ${r.tahun}</strong> · ${Number(r.ringkasan?.total||0)} rekod <button type="button" data-report-id="${r.id}">📂 Buka</button></div>`).join(""):"Belum ada arkib.";$("reportArchiveList").querySelectorAll("[data-report-id]").forEach(b=>b.onclick=()=>openReportArchive(b.dataset.reportId));}
+async function openReportArchive(id){const {data,error}=await db.from("laporan_bulanan").select("*").eq("id",id).eq("penyelia_id",currentUser.id).single();if(error){$("reportMessage").textContent="❌ "+error.message;return;}reportArchive=data;reportRender(data.rekod||[]);$("reportMessage").textContent=`📂 Arkib ${reportMonths[data.bulan-1]} ${data.tahun} dibuka (salinan disimpan ${new Date(data.created_at).toLocaleString("ms-MY")}). Tekan Cetak / PDF untuk mencetak arkib ini.`;}
+$("reportRefresh").onclick=loadMonthlyReport;$("reportMonth").onchange=loadMonthlyReport;$("reportYear").onchange=loadMonthlyReport;
+$("reportSave").onclick=async()=>{if(currentProfile?.peranan!=="penyelia")return;const range=reportRange();if(!confirm(`Jana dan simpan arkib ${range.label}? Arkib sedia ada bagi bulan yang sama akan dikemas kini.`))return;const b=$("reportSave");b.disabled=true;$("reportMessage").textContent="Sedang menjana arkib...";try{const {data,error}=await db.rpc("jana_laporan_bulanan",{p_tahun:range.y,p_bulan:range.m});if(error)throw error;$("reportMessage").textContent="✅ Arkib disimpan. ID: "+data+". Rekod asal tidak dipadam.";await loadReportArchives();}catch(e){$("reportMessage").textContent="❌ "+e.message+". Pastikan SQL arkib telah dipasang.";}finally{b.disabled=false;}};
+$("reportPrint").onclick=()=>{if(currentProfile?.peranan!=="penyelia")return;const range=reportArchive?{label:reportMonths[reportArchive.bulan-1]+" "+reportArchive.tahun}:reportRange(),rows=reportArchive?.rekod||reportRows,st=reportSummarize(rows);const tr=rows.map((r,i)=>`<tr><td>${i+1}</td><td>${escapeHTML(new Date(r.created_at).toLocaleDateString("ms-MY"))}</td><td>${escapeHTML(r.kelas)}</td><td>${escapeHTML(r.tajuk||r.mesej||r.komen)}</td><td>${escapeHTML(r.balasan_guru||"—")}</td><td>${escapeHTML(statusNames[recordStatus(r)])}</td></tr>`).join("");const w=window.open("","_blank");if(!w){alert("Benarkan pop-up untuk mencetak laporan.");return;}w.document.write(`<!doctype html><html lang="ms"><head><meta charset="utf-8"><title>Laporan ${escapeHTML(range.label)}</title><style>body{font-family:Arial,sans-serif;margin:28px;color:#17243b}h1,h2{text-align:center}table{width:100%;border-collapse:collapse;margin:18px 0;font-size:11px}td,th{border:1px solid #8893a7;padding:7px;text-align:left;vertical-align:top;overflow-wrap:anywhere}th{background:#eaf1ff}@page{size:A4 landscape;margin:12mm}</style></head><body><h2>KEMAS — i-RESPON</h2><h1>LAPORAN PEMANTAUAN BULANAN</h1><p style="text-align:center">${escapeHTML(range.label)} · Penyelia: ${escapeHTML(currentProfile.nama)}</p><p><b>Jumlah:</b> ${st.total} &nbsp; <b>Selesai:</b> ${st.done} &nbsp; <b>Menunggu Pengesahan:</b> ${st.review} &nbsp; <b>Belum Dijawab:</b> ${st.waiting} &nbsp; <b>Kadar Selesai:</b> ${st.percent}%</p><table><thead><tr><th>No.</th><th>Tarikh</th><th>Kelas</th><th>Penemuan</th><th>Maklum Balas Guru</th><th>Status</th></tr></thead><tbody>${tr||'<tr><td colspan="6">Tiada rekod</td></tr>'}</tbody></table><p>Disediakan oleh: ${escapeHTML(currentProfile.nama)}</p><p>Tarikh cetakan: ${new Date().toLocaleDateString("ms-MY")}</p><p style="font-size:10px">Nota: Bukti gambar disimpan sebagai rujukan dalam sistem; cetakan ini memaparkan ringkasan teks.</p></body></html>`);w.document.close();w.focus();setTimeout(()=>w.print(),350);};
+/* ===== TAMAT LAPORAN BULANAN ===== */
+
+
 function showModule(moduleName){
  if(!currentProfile)return;
  const dashboard=$("dashboardSection");
@@ -1371,8 +1665,8 @@ function showModule(moduleName){
  $("dashboardTitle").textContent=moduleName==="surat"?"Edaran Surat / Memo":currentProfile.peranan==="penyelia"?"Dashboard Penyelia":"Dashboard Guru";
  window.scrollTo({top:0,behavior:"smooth"});
 }
-$("enterPemantauan").onclick=()=>showModule("pemantauan");
-$("enterSurat").onclick=()=>showModule("surat");
+$("enterPemantauan").onclick=()=>{showModule("pemantauan")};
+$("enterSurat").onclick=()=>{showModule("surat")};
 $("backToModules").onclick=()=>showModule("home");
 $("homeLogoutButton").onclick=()=>$("logoutButton").click();
 
@@ -1385,6 +1679,7 @@ async function showDashboard(){
  const name=(currentProfile.nama||currentUser.email||"Pengguna").trim();
  $("moduleWelcome").textContent="Selamat Datang, "+name;
  $("moduleRole").textContent=currentProfile.peranan==="penyelia"?"Akses Penyelia i-RESPON":"Akses Guru i-RESPON";
+ profileAvatarDisplay();
  $("userInfo").textContent=name+" · "+currentProfile.peranan+(currentProfile.kelas?" · Kelas "+currentProfile.kelas:"");
  $("bukaBorangSurat").classList.toggle("hidden",currentProfile.peranan!=="penyelia");
  $("suratAdminPanel").classList.add("hidden");
@@ -1400,6 +1695,7 @@ async function showDashboard(){
 }
 
 $("logoutButton").onclick=async()=>{
+ closeProfileSettings();
  await db.auth.signOut();
 
  currentUser=null;
@@ -1521,24 +1817,6 @@ $("supervisorForm").addEventListener("submit",async e=>{
   }).select("id").single();
 
   if(error)throw error;
-
-  try{
-   const {data:sess}=await db.auth.getSession();
-
-   if(sess.session?.access_token){
-    await fetch(SUPABASE_URL+"/functions/v1/hantar-notifikasi",{
-     method:"POST",
-     headers:{
-      "Content-Type":"application/json",
-      "Authorization":"Bearer "+sess.session.access_token,
-      "apikey":SUPABASE_KEY
-     },
-     body:JSON.stringify({record_id:data.id})
-    });
-   }
-  }catch(err){
-   console.warn("Notifikasi tidak dihantar:",err);
-  }
 
   $("supervisorForm").reset();
   $("teacherSelect").innerHTML='<option value="">Pilih kelas dahulu</option>';
@@ -2600,20 +2878,33 @@ restoreSession();
  function startIntro(){
    started=true;finished=false;getCtx();
    try{window.speechSynthesis?.getVoices()}catch(e){}
-   // 0-3s: mesin dihidupkan, gear berputar dan turbine semakin deras
-   machine(48,155,2.65,.17,'sawtooth');
-   machine(85,420,2.7,.095,'triangle');
-   noise(2.5,.07,180,1900);
-   for(let i=0;i<9;i++)schedule(()=>{
-     tone(140+i*35,.12,.048,'square',100+i*55);
-   },420+i*255);
-   schedule(()=>{machine(155,650,.86,.16,'sawtooth');noise(.9,.13,350,2600)},2200);
-   // 3.1s: logo muncul dan hentaman bass
-   schedule(impact,3100);
-   // 3.45s: suara perempuan masuk KETIKA logo jelas, bukan pada skrin login
+   // GAME START: melodi major yang menaik, synth arcade terang + sparkle mekanikal.
+   // Semua bunyi dijana oleh Web Audio; tiada fail MP3 diperlukan.
+   function gameNote(hz,ms=170,vol=.13){
+     tone(hz,ms/1000,vol,'square',hz*1.015);
+     tone(hz*2,ms/1000*.75,vol*.36,'triangle');
+     tone(hz*3,ms/1000*.4,vol*.12,'sine');
+   }
+   // Gear digital / coin pickup yang tajam tetapi tidak berat.
+   function coin(hz){tone(hz,.095,.11,'square',hz*1.5);tone(hz*2,.13,.065,'sine',hz*2.3);}
+   const melody=[523.25,659.25,783.99,1046.5,880,1046.5,1174.66,1318.51,1567.98];
+   melody.forEach((hz,i)=>schedule(()=>{
+     gameNote(hz,i>=6?230:175,i>=6?.15:.13);
+     if(i===2||i===5||i===8)coin(hz*1.5);
+   },180+i*285));
+   // Fanfar kemenangan semasa logo muncul: chord C major yang cerah.
+   schedule(()=>{
+     [523.25,659.25,783.99,1046.5].forEach((hz,i)=>{
+       tone(hz,.8,.085,'triangle',hz*1.005);
+       tone(hz*2,.45,.025,'sine');
+     });
+     coin(1318.51);
+   },2900);
+   // Masa suara sambutan asal dikekalkan.
    schedule(welcomeDuringLogo,3450);
-   // 5.2s: outro hanya whoosh ringkas ketika logo mengecil
-   schedule(()=>{noise(.53,.085,1900,280);tone(780,.32,.03,'sine',260)},5200);
+   // Penutup seperti berjaya masuk ke permainan.
+   schedule(()=>{gameNote(1318.51,180,.12);coin(1567.98);},5100);
+   schedule(()=>{gameNote(1567.98,300,.14);tone(2093,.35,.07,'sine');},5300);
  }
  toggle?.addEventListener('click',()=>{
    enabled=!enabled;updateToggle();
@@ -2686,9 +2977,7 @@ restoreSession();
  }
 })();
 
+
 </script>
 </body>
 </html>
-
-
-
